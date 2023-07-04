@@ -1,4 +1,4 @@
-package com.example.NewsWebsite.controllers;
+package com.example.NewsWebsite.Web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,9 +8,5 @@ public class IndexController {
 	@GetMapping("/")
 	public String HomePage(){
 		return "index";
-	}
-	@GetMapping("/register")
-	public String registerPage(){
-		return "register";
 	}
 }

@@ -1,9 +1,8 @@
 package com.example.NewsWebsite.Model.Entity;
 
 import com.example.NewsWebsite.Model.Enums.UserRoles;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.List;
 import java.util.Set;
@@ -18,8 +17,9 @@ public class UserEntity extends BaseEntity{
 	private String username;
 	@Column(nullable = false)
 	private String password;
-	@Column
-	Set<UserRoles> userRolesList;
+
+	@Enumerated(EnumType.STRING)
+	Set<UserRoles> userRolesSet;
 
 	public String getFirstName() {
 		return firstName;
@@ -57,12 +57,12 @@ public class UserEntity extends BaseEntity{
 		return this;
 	}
 
-	public Set<UserRoles> getUserRolesList() {
-		return userRolesList;
+	public Set<UserRoles> getUserRolesSet() {
+		return userRolesSet;
 	}
 
-	public UserEntity setUserRolesList(Set<UserRoles> userRolesList) {
-		this.userRolesList = userRolesList;
+	public UserEntity setUserRolesSet(Set<UserRoles> userRolesList) {
+		this.userRolesSet = userRolesList;
 		return this;
 	}
 }
