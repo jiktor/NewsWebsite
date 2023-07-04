@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void registerNewUser(UserDTO userDTO) {
 		if(userRepository.findByUsername(userDTO.getUsername())==null){
+			//todo encode password
 			userRepository.save(userMapper.DTOToUser(userDTO));
 		}else{
 			//TODO logic if username already exists
