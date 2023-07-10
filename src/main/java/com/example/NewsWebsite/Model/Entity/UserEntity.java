@@ -3,12 +3,15 @@ package com.example.NewsWebsite.Model.Entity;
 import com.example.NewsWebsite.Model.Enums.UserRoles;
 import jakarta.persistence.*;
 import org.hibernate.validator.constraints.UniqueElements;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 @Entity
-public class UserEntity extends BaseEntity{
+public class UserEntity extends BaseEntity implements UserDetails {
 	@Column
 	private String firstName;
 	@Column
@@ -18,8 +21,9 @@ public class UserEntity extends BaseEntity{
 	@Column(nullable = false)
 	private String password;
 
-	@Enumerated(EnumType.STRING)
-	Set<UserRoles> userRolesSet;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinColumn
+	Set<RolesEntity> userRolesSet;
 
 	public String getFirstName() {
 		return firstName;
@@ -43,9 +47,35 @@ public class UserEntity extends BaseEntity{
 		return username;
 	}
 
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
 	public UserEntity setUsername(String username) {
 		this.username = username;
 		return this;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		//todo this a stub
+		return this.userRolesSet;
 	}
 
 	public String getPassword() {
@@ -57,12 +87,21 @@ public class UserEntity extends BaseEntity{
 		return this;
 	}
 
-	public Set<UserRoles> getUserRolesSet() {
+	public Set<RolesEntity> getUserRolesSet() {
 		return userRolesSet;
 	}
 
-	public UserEntity setUserRolesSet(Set<UserRoles> userRolesList) {
+	public UserEntity setUserRolesSet(Set<RolesEntity> userRolesList) {
 		this.userRolesSet = userRolesList;
 		return this;
 	}
+
+	public UserEntity(String firstName, String lastName, String username, String password, Set<RolesEntity> userRolesSet) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
+		this.userRolesSet = userRolesSet;
+	}
+	public UserEntity() {}
 }

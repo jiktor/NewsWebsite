@@ -1,7 +1,6 @@
 package com.example.NewsWebsite.Model.DTO;
 
-import com.example.NewsWebsite.Model.Enums.UserRoles;
-import jakarta.persistence.UniqueConstraint;
+import com.example.NewsWebsite.Model.Entity.RolesEntity;
 import jakarta.validation.constraints.NotEmpty;
 import org.springframework.lang.NonNull;
 
@@ -18,7 +17,7 @@ public class UserDTO {
 	@NonNull
 	private String password;
 	private String confirmPassword;
-	private Set<UserRoles> userRolesSet;
+	private Set<RolesEntity> userRolesSet;
 
 	public String getPassword() {
 		return password;
@@ -65,11 +64,11 @@ public class UserDTO {
 		return this;
 	}
 
-	public Set<UserRoles> getUserRolesSet() {
+	public Set<RolesEntity> getUserRolesSet() {
 		return userRolesSet;
 	}
 
-	public UserDTO setUserRolesSet(Set<UserRoles> userRolesSet) {
+	public UserDTO setUserRolesSet(Set<RolesEntity> userRolesSet) {
 		this.userRolesSet = userRolesSet;
 		return this;
 	}
