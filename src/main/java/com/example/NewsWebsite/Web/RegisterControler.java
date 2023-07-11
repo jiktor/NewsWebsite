@@ -3,11 +3,13 @@ package com.example.NewsWebsite.Web;
 import ch.qos.logback.core.model.Model;
 import com.example.NewsWebsite.Model.DTO.UserDTO;
 import com.example.NewsWebsite.Model.Entity.RolesEntity;
+import com.example.NewsWebsite.Model.Entity.UserEntity;
 import com.example.NewsWebsite.Model.Enums.UserRoles;
 import com.example.NewsWebsite.Services.RolesService;
 import com.example.NewsWebsite.Services.UserEntityService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +31,7 @@ public class RegisterControler {
 		this.rolesService = rolesService;
 	}
 	//retuens empty dto if page is accessed for the first time
-	@ModelAttribute
+	@ModelAttribute("userDTO")
 	public UserDTO userDTO(){
 		return new UserDTO();
 	}
@@ -40,9 +42,32 @@ public class RegisterControler {
 	@PostMapping("/register")
 	public String submitRegister(@Valid UserDTO userDTO,
 								 BindingResult bindingResult,
-								 RedirectAttributes redirectAttributes){
+								 RedirectAttributes redirectAttributes,
+								 Model model) {
+		//check if username is avaivable
+		try {
+		UserEntity userEntity = userEntityService.findByUsernameService(userDTO.getUsername());
+		if (userEntity != null) {
+			redirectAttributes.
+					addFlashAttribute("usernameTaken", true).
+					addFlashAttribute("userDTO", userDTO).
+					addFlashAttribute("org.springframework.validation.BindingResult.userDTO", bindingResult);
+			return "redirect:/register";
+		}
+	}catch (UsernameNotFoundException e){
+			//if username is not found the validiation proccess can continue
+		}
+		//Check for errors caused by dto annotations
 		if(bindingResult.hasErrors()){
 			redirectAttributes.
+					addFlashAttribute("userDTO", userDTO).
+					addFlashAttribute("org.springframework.validation.BindingResult.userDTO",bindingResult);
+			return "redirect:/register";
+		}
+		//Check for matching passwords
+		if(!userDTO.getPassword().equals(userDTO.getConfirmPassword())){
+			redirectAttributes.
+					addFlashAttribute("passwordsNotMatching", true).
 					addFlashAttribute("userDTO", userDTO).
 					addFlashAttribute("org.springframework.validation.BindingResult.userDTO",bindingResult);
 			return "redirect:/register";

@@ -36,7 +36,7 @@ public class UserEntityServiceImpl implements UserEntityService, UserDetailsServ
 		}
 	}
 	@Override
-	public UserEntity findByUsernameService(String username) {
+	public UserEntity findByUsernameService(String username) throws UsernameNotFoundException{
 			return userEntityRepository.findByUsername(username)
 					.orElseThrow(()->new UsernameNotFoundException("user with username: "+username+" does not exist"));
 	}
@@ -49,6 +49,6 @@ public class UserEntityServiceImpl implements UserEntityService, UserDetailsServ
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		return userEntityRepository.findByUsername(username)
-				.orElseThrow();
+				.orElseThrow(() -> new RuntimeException());
 	}
 }

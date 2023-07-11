@@ -16,10 +16,26 @@
         <div class="col-10 bg-light">
 
             <div class="d-flex flex-column bg-light rounded-3 mt-3">
-                <form th:object="${userDTO}" th:action="@{/register}" method="post">
+                <form th:object="${userDTO}"
+                      th:action="@{/register}"
+                      th:method="post">
                     <div class="mb-3">
                         <label th:text="username" class="form-label">Username</label>
-                        <input th:field="*{username}" class="form-control" id="username">
+                        <input th:field="*{username}"
+                               th:errorclass="is-invalid"
+                               class="form-control"
+                               id="username">
+                        <small id="usernameHlep"
+                                class="invalid-feedback bg-danger text-light rounded">
+                            Username is mandatory
+                        </small>
+                    </div>
+                    <div th:if="${usernameTaken}" class="row">
+                        <div class="form-group col-md-12 mb-6">
+                            <p class="errors alert alert-danger">
+                                Username is taken
+                            </p>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="firstName" class="form-label">First Name</label>
@@ -31,11 +47,34 @@
                     </div>
                     <div class="mb-3">
                         <label for="inputPassword1" class="form-label">Password</label>
-                        <input type="password" th:field="*{password}" class="form-control" id="inputPassword1">
+                        <input type="password"
+                               th:field="*{password}"
+                               class="form-control"
+                               th:errorclass="is-invalid"
+                               id="inputPassword1">
+                        <small id="password"
+                               class="invalid-feedback bg-danger text-light rounded">
+                            Password is mandatory
+                        </small>
                     </div>
                     <div class="mb-3">
                         <label for="confirmInputPassword1" class="form-label">Confirm password</label>
-                        <input type="password" th:field="*{confirmPassword}" class="form-control" id="confirmInputPassword1">
+                        <input type="password"
+                               th:errorclass="is-invalid"
+                               th:field="*{confirmPassword}"
+                               class="form-control"
+                               id="confirmInputPassword1">
+                        <small id="confirmPassword"
+                               class="invalid-feedback bg-danger text-light rounded">
+                            Password is mandatory
+                        </small>
+                    </div>
+                    <div th:if="${passwordsNotMatching}" class="row">
+                        <div class="form-group col-md-12 mb-6">
+                            <p class="errors alert alert-danger">
+                                Confirm password does not match password
+                            </p>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-dark">Submit</button>
                     <button type="reset" class="btn btn-dark">Reset</button>

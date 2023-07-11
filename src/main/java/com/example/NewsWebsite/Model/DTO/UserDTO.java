@@ -1,6 +1,7 @@
 package com.example.NewsWebsite.Model.DTO;
 
 import com.example.NewsWebsite.Model.Entity.RolesEntity;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import org.springframework.lang.NonNull;
 
