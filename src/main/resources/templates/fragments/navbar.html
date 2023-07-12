@@ -30,6 +30,10 @@
         <a class="nav-link" href="/logout">Logout</a>
       </li>
       <li class="nav-item"
+          sec:authorize="hasRole('ROLE_AUTHOR')">
+        <a class="nav-link" href="/author">New Article</a>
+      </li>
+      <li class="nav-item"
           sec:authorize="hasRole('ROLE_ADMIN')">
         <a class="nav-link" href="/admin">Admin</a>
       </li>
