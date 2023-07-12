@@ -12,7 +12,7 @@ import java.util.List;
 public class ArticleEntity extends BaseEntity{
 	@Column
 	@NotEmpty
-	private String name;
+	private String title;
 	@Column
 	@NotEmpty
 	private String text;
@@ -25,20 +25,20 @@ public class ArticleEntity extends BaseEntity{
 	@Lob
 	private List<byte[]> images;
 	public ArticleEntity(){}
-	public ArticleEntity(String name, String text, Date dateOfPublishing, UserEntity author, List<byte[]> images) {
-		this.name = name;
+	public ArticleEntity(String title, String text, Date dateOfPublishing, UserEntity author, List<byte[]> images) {
+		this.title = title;
 		this.text = text;
 		this.dateOfPublishing = dateOfPublishing;
 		this.author = author;
 		this.images = images;
 	}
 
-	public String getName() {
-		return name;
+	public String gettitle() {
+		return title;
 	}
 
-	public ArticleEntity setName(String name) {
-		this.name = name;
+	public ArticleEntity setTitle(String title) {
+		this.title = title;
 		return this;
 	}
 

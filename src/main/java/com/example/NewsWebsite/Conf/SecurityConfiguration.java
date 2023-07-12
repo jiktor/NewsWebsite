@@ -24,7 +24,7 @@ public class SecurityConfiguration {
 				 .authorizeHttpRequests(auth -> {
 					 auth.requestMatchers("/").authenticated();
 					 auth.requestMatchers("/admin").hasRole("ADMIN");
-					 auth.requestMatchers("/author").hasRole("AUTHOR");
+					 auth.requestMatchers("/newArticle").hasRole("AUTHOR");
 					 auth.requestMatchers("/login").permitAll();
 					 auth.requestMatchers("/register").permitAll();
 				 }).formLogin(form -> form

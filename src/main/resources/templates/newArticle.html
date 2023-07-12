@@ -14,13 +14,52 @@
   <div class="row vh-100">
     <div class="col-1"></div>
     <div class="col-10 bg-light">
-      <form th:object="${userDTO}"
-            th:action="@{/author}"
+      <form th:object="${articleDTO}"
+            th:action="@{/newArticle}"
             th:method="post">
-
+        <br>
+        <label>Heading</label>
+        <input th:field="*{title}"
+               th:errorclass="is-invalid"
+               type="text"
+               size="50">
+        <small id="headingHelp"
+               class="invalid-feedback bg-danger text-light rounded">
+          Heading is mandatory is mandatory
+        </small>
+        <br>
+        <br>
+            <textarea id="freeform"
+                      name="freeform"
+                      rows="18"
+                      cols="165"
+                      th:field="*{text}"
+                      th:errorclass="is-invalid"></textarea>
+        <small id="textHelp"
+               class="invalid-feedback bg-danger text-light rounded">
+          Text is mandatory is mandatory
+        </small>
+        <br>
+        <br>
+        <input type="file"
+               multiple
+               th:field="*{images}"
+               th:errorclass="is-invalid">
+        <br>
+        <br>
         <button type="submit" class="btn btn-dark">Submit</button>
         <button type="reset" class="btn btn-dark">Reset</button>
       </form>
+      <script>
+         $(function(){
+            $("input[type = 'submit']").click(function(){
+               var $fileUpload = $("input[type='file']");
+               if (parseInt($fileUpload.get(0).files.length) > 3){
+                  alert("You are only allowed to upload a maximum of 3 files");
+               }
+            });
+         });
+      </script>
     </div>
     <div class="col-1"></div>
   </div>
