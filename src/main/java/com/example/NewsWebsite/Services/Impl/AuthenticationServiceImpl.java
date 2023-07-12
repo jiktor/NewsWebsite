@@ -46,7 +46,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
 		System.out.println(userEntity.getPassword() + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		//All users are given role "USER" when registered. Only a User with role "ADMIN" can grant them other roles.
-		RolesEntity rolesEntity = rolesService.findByUserRole(UserRoles.USER).orElseThrow(() -> new RuntimeException("User role was not added"));
+		RolesEntity rolesEntity = rolesService.findByUserRole(UserRoles.ROLE_USER).orElseThrow(() -> new RuntimeException("User role was not added"));
 		Set<RolesEntity> set = new HashSet<>();
 		set.add(rolesEntity);
 		userEntity.setUserRolesSet(set);

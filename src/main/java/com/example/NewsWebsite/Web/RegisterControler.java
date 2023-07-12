@@ -75,7 +75,7 @@ public class RegisterControler {
 		//If there are no errors the user is set role User.
 		//If a new user has to have different roles than user, an admin should grant them to him manually
 		//TODO: Implement granting roles for user
-		RolesEntity roleForUser = rolesService.findByUserRole(UserRoles.USER)
+		RolesEntity roleForUser = rolesService.findByUserRole(UserRoles.ROLE_USER)
 				.orElseThrow(() -> new RuntimeException("sda"));
 		Set<RolesEntity> rolesEntitySet = new HashSet<RolesEntity>();
 		rolesEntitySet.add(roleForUser);
