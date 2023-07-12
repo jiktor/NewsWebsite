@@ -28,6 +28,7 @@ public class CommandLine implements CommandLineRunner {
 //		rolesRepository.save(new RolesEntity().setUserRole(UserRoles.ADMIN));
 		userRoles.add(rolesRepository.findByUserRole(UserRoles.ROLE_USER).orElseThrow());
 		userRoles.add(rolesRepository.findByUserRole(UserRoles.ROLE_ADMIN).orElseThrow());
+		userRoles.add(rolesRepository.findByUserRole(UserRoles.ROLE_AUTHOR).orElseThrow());
 		UserEntity user = new UserEntity();
 		user
 				.setUsername("test")
