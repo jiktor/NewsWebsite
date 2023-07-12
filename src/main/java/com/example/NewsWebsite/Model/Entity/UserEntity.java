@@ -20,10 +20,20 @@ public class UserEntity extends BaseEntity implements UserDetails {
 	private String username;
 	@Column(nullable = false)
 	private String password;
-
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinColumn
 	Set<RolesEntity> userRolesSet;
+	@OneToMany(mappedBy = "author")
+	private Set<ArticleEntity> articles;
+
+	public Set<ArticleEntity> getArticles() {
+		return articles;
+	}
+
+	public UserEntity setArticles(Set<ArticleEntity> articles) {
+		this.articles = articles;
+		return this;
+	}
 
 	public String getFirstName() {
 		return firstName;
