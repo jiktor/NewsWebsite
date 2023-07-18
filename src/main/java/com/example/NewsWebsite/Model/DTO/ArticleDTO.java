@@ -11,18 +11,29 @@ public class ArticleDTO {
 	private String title;
 	@NotEmpty
 	private String text;
-	private List<byte[]> images;
+	private byte[] images;
 	private UserEntity userEntity;
 
 	private Date dateOfCreation;
+	private String base64Image;
 
-	public ArticleDTO(String title, String text, List<byte[]> images, UserEntity userEntity, Date dateOfCreation) {
+	public ArticleDTO(String title, String text, byte[] images, UserEntity userEntity, Date dateOfCreation) {
 		this.title = title;
 		this.text = text;
 		this.images = images;
 		this.userEntity = userEntity;
 		this.dateOfCreation = dateOfCreation;
 	}
+
+	public String getBase64Image() {
+		return base64Image;
+	}
+
+	public ArticleDTO setBase64Image(String base64Image) {
+		this.base64Image = base64Image;
+		return this;
+	}
+
 	public ArticleDTO(){}
 	public String getTitle() {
 		return title;
@@ -42,11 +53,11 @@ public class ArticleDTO {
 		return this;
 	}
 
-	public List<byte[]> getImages() {
+	public byte[] getImages() {
 		return images;
 	}
 
-	public ArticleDTO setImages(List<byte[]> images) {
+	public ArticleDTO setImages(byte[] images) {
 		this.images = images;
 		return this;
 	}

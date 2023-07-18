@@ -10,10 +10,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.Base64;
 
 @Controller
 public class NewArticleController {
@@ -35,15 +39,17 @@ public class NewArticleController {
 								BindingResult bindingResult,
 								RedirectAttributes redirectAttributes,
 								Model model,
-								Principal principal){
+								Principal principal,
+								@RequestParam("image") MultipartFile multipartFile) throws IOException {
 	if(bindingResult.hasErrors()){
 		redirectAttributes
 				.addFlashAttribute("articleDTO",articleDTO)
 				.addFlashAttribute("org.springframework.validation.BindingResult.articleDTO",bindingResult);
 		return "redirect:/newArticle";
 	}
-		LocalDateTime myLocalDateTime =  LocalDateTime.now();
+	LocalDateTime myLocalDateTime =  LocalDateTime.now();
 	articleDTO.setDateOfCreation(java.sql.Timestamp.valueOf( myLocalDateTime ));
+	articleDTO.setImages(multipartFile.getBytes());
 	articleService.saveArticle(articleDTO, principal.getName());
 	//todo: make a html for saved article
 	return "redirect:/";

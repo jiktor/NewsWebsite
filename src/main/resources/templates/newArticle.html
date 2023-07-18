@@ -16,7 +16,8 @@
     <div class="col-10 bg-light">
       <form th:object="${articleDTO}"
             th:action="@{/newArticle}"
-            th:method="post">
+            th:method="post"
+            enctype="multipart/form-data">
         <br>
         <label>Heading</label>
         <input th:field="*{title}"
@@ -41,25 +42,24 @@
         </small>
         <br>
         <br>
+        <!--
         <input type="file"
-               multiple
+               class="form-control-file"
+               id="image"
+               name="image"
+               accept="image/*"
                th:field="*{images}"
                th:errorclass="is-invalid">
+               -->
+        <div class="form-group">
+          <input type="file" name="image" accept="image/*" class="form-control-file">
+        </div>
+
         <br>
         <br>
         <button type="submit" class="btn btn-dark">Submit</button>
         <button type="reset" class="btn btn-dark">Reset</button>
       </form>
-      <script>
-         $(function(){
-            $("input[type = 'submit']").click(function(){
-               var $fileUpload = $("input[type='file']");
-               if (parseInt($fileUpload.get(0).files.length) > 3){
-                  alert("You are only allowed to upload a maximum of 3 files");
-               }
-            });
-         });
-      </script>
     </div>
     <div class="col-1"></div>
   </div>

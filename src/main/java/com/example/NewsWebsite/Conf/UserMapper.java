@@ -19,4 +19,7 @@ public class UserMapper {
 	public ArticleEntity DTOToArticle (ArticleDTO articleDTO){
 		return modelMapper.map(articleDTO, ArticleEntity.class);
 	}
+	public ArticleDTO articleToDTO (ArticleEntity article){
+		return modelMapper.map(article, ArticleDTO.class);
+	}
 }

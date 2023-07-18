@@ -4,8 +4,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.internal.constraintvalidators.bv.time.future.FutureValidatorForLocalDateTime;
 
+import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
 @Entity
@@ -21,11 +23,11 @@ public class ArticleEntity extends BaseEntity{
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private UserEntity author;
-	@Column
+	@Column(columnDefinition="BLOB")
 	@Lob
-	private List<byte[]> images;
+	private byte[] images;
 	public ArticleEntity(){}
-	public ArticleEntity(String title, String text, Date dateOfPublishing, UserEntity author, List<byte[]> images) {
+	public ArticleEntity(String title, String text, Date dateOfPublishing, UserEntity author,byte[] images) {
 		this.title = title;
 		this.text = text;
 		this.dateOfPublishing = dateOfPublishing;
@@ -69,11 +71,11 @@ public class ArticleEntity extends BaseEntity{
 		return this;
 	}
 
-	public List<byte[]> getImages() {
+	public byte[] getImages() {
 		return images;
 	}
 
-	public ArticleEntity setImages(List<byte[]> images) {
+	public ArticleEntity setImages(byte[] images) {
 		this.images = images;
 		return this;
 	}

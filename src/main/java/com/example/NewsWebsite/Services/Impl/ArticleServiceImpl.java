@@ -9,6 +9,11 @@ import com.example.NewsWebsite.Services.UserEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ArticleServiceImpl implements ArticleService {
 	private final ArticleRepository articleRepository;
@@ -25,5 +30,19 @@ public class ArticleServiceImpl implements ArticleService {
 		ArticleEntity articleEntity = userMapper.DTOToArticle(articleDTO);
 		articleEntity.setAuthor(userEntityService.findByUsernameService(username));
 		articleRepository.save(articleEntity);
+	}
+
+	@Override
+	public List<ArticleDTO> findAllArticles() {
+		List<ArticleEntity> list = articleRepository.findAll();
+		List<ArticleDTO> articleDTOS = new ArrayList<>();
+		for (ArticleEntity a:list) {
+			articleDTOS.add(userMapper.articleToDTO(a));
+		}
+		for(int i =0; i<articleDTOS.size();i++){
+			articleDTOS.get(i)
+					.setBase64Image(Base64.getEncoder().encodeToString(articleDTOS.get(i).getImages()));
+		}
+		return articleDTOS;
 	}
 }
