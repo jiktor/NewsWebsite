@@ -22,6 +22,7 @@ public class SecurityConfiguration {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 		 http
 				 .authorizeHttpRequests(auth -> {
+					 auth.requestMatchers("/home/*").authenticated();
 					 auth.requestMatchers("/").authenticated();
 					 auth.requestMatchers("/admin").hasRole("ADMIN");
 					 auth.requestMatchers("/newArticle").hasRole("AUTHOR");
@@ -29,7 +30,7 @@ public class SecurityConfiguration {
 					 auth.requestMatchers("/register").permitAll();
 				 }).formLogin(form -> form
 						 .loginPage("/login")
-						 .defaultSuccessUrl("/")
+						 .defaultSuccessUrl("/home/1?pageNumber=1",true)
 						 .loginProcessingUrl("/login")
 						 .failureForwardUrl("/login?error")
 						 .permitAll())

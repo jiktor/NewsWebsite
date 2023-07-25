@@ -4,7 +4,6 @@ import com.example.NewsWebsite.Model.Entity.UserEntity;
 import jakarta.validation.constraints.NotEmpty;
 
 import java.util.Date;
-import java.util.List;
 
 public class ArticleDTO {
 	@NotEmpty
@@ -12,16 +11,16 @@ public class ArticleDTO {
 	@NotEmpty
 	private String text;
 	private byte[] images;
-	private UserEntity userEntity;
+	private UserEntity author;
 
 	private Date dateOfCreation;
 	private String base64Image;
 
-	public ArticleDTO(String title, String text, byte[] images, UserEntity userEntity, Date dateOfCreation) {
+	public ArticleDTO(String title, String text, byte[] images, UserEntity author, Date dateOfCreation) {
 		this.title = title;
 		this.text = text;
 		this.images = images;
-		this.userEntity = userEntity;
+		this.author = author;
 		this.dateOfCreation = dateOfCreation;
 	}
 
@@ -62,12 +61,12 @@ public class ArticleDTO {
 		return this;
 	}
 
-	public UserEntity getUserEntity() {
-		return userEntity;
+	public UserEntity getAuthor() {
+		return author;
 	}
 
-	public ArticleDTO setUserEntity(UserEntity userEntity) {
-		this.userEntity = userEntity;
+	public ArticleDTO setAuthor(UserEntity author) {
+		this.author = author;
 		return this;
 	}
 

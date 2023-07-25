@@ -52,6 +52,6 @@ public class NewArticleController {
 	articleDTO.setImages(multipartFile.getBytes());
 	articleService.saveArticle(articleDTO, principal.getName());
 	//todo: make a html for saved article
-	return "redirect:/";
+	return "redirect:/home/1?pageNumber=1";
 	}
 }

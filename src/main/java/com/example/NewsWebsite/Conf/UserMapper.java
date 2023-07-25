@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Base64;
+
 @Configuration
 public class UserMapper {
 
@@ -20,6 +22,9 @@ public class UserMapper {
 		return modelMapper.map(articleDTO, ArticleEntity.class);
 	}
 	public ArticleDTO articleToDTO (ArticleEntity article){
-		return modelMapper.map(article, ArticleDTO.class);
+		ArticleDTO articleDTO = modelMapper.map(article, ArticleDTO.class);
+		articleDTO
+				.setBase64Image(Base64.getEncoder().encodeToString(article.getImages()));
+		return articleDTO;
 	}
 }

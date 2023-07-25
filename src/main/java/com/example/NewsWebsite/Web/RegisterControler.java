@@ -81,6 +81,6 @@ public class RegisterControler {
 		rolesEntitySet.add(roleForUser);
 		userDTO.setUserRolesSet(rolesEntitySet);
 		userEntityService.registerNewUser(userDTO);
-		return "redirect:/";
+		return "redirect:/home/1";
 	}
 }

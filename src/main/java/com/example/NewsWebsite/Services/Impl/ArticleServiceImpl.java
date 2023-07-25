@@ -6,12 +6,17 @@ import com.example.NewsWebsite.Model.Entity.ArticleEntity;
 import com.example.NewsWebsite.Repositories.ArticleRepository;
 import com.example.NewsWebsite.Services.ArticleService;
 import com.example.NewsWebsite.Services.UserEntityService;
+import org.modelmapper.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,5 +49,29 @@ public class ArticleServiceImpl implements ArticleService {
 					.setBase64Image(Base64.getEncoder().encodeToString(articleDTOS.get(i).getImages()));
 		}
 		return articleDTOS;
+	}
+
+	@Override
+	public Page<ArticleDTO> findPage(int pageNumber) {
+		//трябва да се изтрие между двата конебтара
+		Pageable pageable = PageRequest.of(pageNumber-1,5);
+		 articleRepository.findAll(pageable);
+		//трябва да се изтрие между двата конебтара
+
+		Page<ArticleEntity> entities = articleRepository.findAll(pageable);
+		if(entities.getTotalElements()!=0){
+			System.out.println("asd");
+		}
+		Page<ArticleDTO> dtoPage = entities.map(new Function<ArticleEntity, ArticleDTO>()  {
+			@Override
+			public ArticleDTO apply(ArticleEntity entity) {
+				ArticleDTO dto = new ArticleDTO();
+				return userMapper.articleToDTO(entity);
+			}
+		});
+		//converting photos from dao entity to dto entity
+
+		//
+		return dtoPage;
 	}
 }
