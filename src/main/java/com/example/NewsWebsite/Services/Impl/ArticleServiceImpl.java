@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -54,7 +55,7 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public Page<ArticleDTO> findPage(int pageNumber) {
 		//трябва да се изтрие между двата конебтара
-		Pageable pageable = PageRequest.of(pageNumber-1,5);
+		Pageable pageable = PageRequest.of(pageNumber-1,3, Sort.by("dateOfPublishing").descending());
 		 articleRepository.findAll(pageable);
 		//трябва да се изтрие между двата конебтара
 
@@ -73,5 +74,12 @@ public class ArticleServiceImpl implements ArticleService {
 
 		//
 		return dtoPage;
+	}
+
+	@Override
+	public ArticleDTO findByTitle(String title) {
+		//трябва да се добави проверка в котролера дали е намерена статия
+		ArticleEntity articleEntity = articleRepository.findByTitle(title).orElse(null);
+		return userMapper.articleToDTO(articleEntity);
 	}
 }

@@ -13,15 +13,15 @@ public class ArticleDTO {
 	private byte[] images;
 	private UserEntity author;
 
-	private Date dateOfCreation;
+	private Date dateOfPublishing;
 	private String base64Image;
 
-	public ArticleDTO(String title, String text, byte[] images, UserEntity author, Date dateOfCreation) {
+	public ArticleDTO(String title, String text, byte[] images, UserEntity author, Date dateOfPublishing) {
 		this.title = title;
 		this.text = text;
 		this.images = images;
 		this.author = author;
-		this.dateOfCreation = dateOfCreation;
+		this.dateOfPublishing = dateOfPublishing;
 	}
 
 	public String getBase64Image() {
@@ -70,12 +70,12 @@ public class ArticleDTO {
 		return this;
 	}
 
-	public Date getDateOfCreation() {
-		return dateOfCreation;
+	public Date getDateOfPublishing() {
+		return dateOfPublishing;
 	}
 
-	public ArticleDTO setDateOfCreation(Date dateOfCreation) {
-		this.dateOfCreation = dateOfCreation;
+	public ArticleDTO setDateOfPublishing(Date dateOfPublishing) {
+		this.dateOfPublishing = dateOfPublishing;
 		return this;
 	}
 }

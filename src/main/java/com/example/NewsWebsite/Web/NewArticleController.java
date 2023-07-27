@@ -17,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
-import java.util.Base64;
 
 @Controller
 public class NewArticleController {
@@ -48,7 +47,7 @@ public class NewArticleController {
 		return "redirect:/newArticle";
 	}
 	LocalDateTime myLocalDateTime =  LocalDateTime.now();
-	articleDTO.setDateOfCreation(java.sql.Timestamp.valueOf( myLocalDateTime ));
+	articleDTO.setDateOfPublishing(java.sql.Timestamp.valueOf( myLocalDateTime ));
 	articleDTO.setImages(multipartFile.getBytes());
 	articleService.saveArticle(articleDTO, principal.getName());
 	//todo: make a html for saved article

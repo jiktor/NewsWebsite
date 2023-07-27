@@ -12,10 +12,10 @@ import java.util.Date;
 import java.util.List;
 @Entity
 public class ArticleEntity extends BaseEntity{
-	@Column
+	@Column(unique = true)
 	@NotEmpty
 	private String title;
-	@Column
+	@Column(columnDefinition = "text")
 	@NotEmpty
 	private String text;
 	@Column

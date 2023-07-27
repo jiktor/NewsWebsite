@@ -22,12 +22,13 @@ public class SecurityConfiguration {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 		 http
 				 .authorizeHttpRequests(auth -> {
-					 auth.requestMatchers("/home/*").authenticated();
 					 auth.requestMatchers("/").authenticated();
 					 auth.requestMatchers("/admin").hasRole("ADMIN");
 					 auth.requestMatchers("/newArticle").hasRole("AUTHOR");
 					 auth.requestMatchers("/login").permitAll();
 					 auth.requestMatchers("/register").permitAll();
+					 auth.requestMatchers("/article*").authenticated();
+					 auth.requestMatchers("/home/*").authenticated();
 				 }).formLogin(form -> form
 						 .loginPage("/login")
 						 .defaultSuccessUrl("/home/1?pageNumber=1",true)
