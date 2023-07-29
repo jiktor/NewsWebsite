@@ -23,6 +23,8 @@ public class ArticleEntity extends BaseEntity{
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private UserEntity author;
+	@OneToMany(mappedBy = "article")
+	private List<CommentEntity> commentEntities;
 	@Column(columnDefinition="BLOB")
 	@Lob
 	private byte[] images;
@@ -33,6 +35,16 @@ public class ArticleEntity extends BaseEntity{
 		this.dateOfPublishing = dateOfPublishing;
 		this.author = author;
 		this.images = images;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public List<CommentEntity> getCommentEntities() {
+		return commentEntities;
+	}
+	public ArticleEntity setCommentEntities(List<CommentEntity> commentEntities) {
+		this.commentEntities = commentEntities;
+		return this;
 	}
 
 	public String gettitle() {

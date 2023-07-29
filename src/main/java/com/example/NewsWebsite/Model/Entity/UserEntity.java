@@ -25,6 +25,17 @@ public class UserEntity extends BaseEntity implements UserDetails {
 	Set<RolesEntity> userRolesSet;
 	@OneToMany(mappedBy = "author")
 	private Set<ArticleEntity> articles;
+	@OneToMany(mappedBy = "author")
+	private Set<CommentEntity> comments;
+
+	public Set<CommentEntity> getComments() {
+		return comments;
+	}
+
+	public UserEntity setComments(Set<CommentEntity> comments) {
+		this.comments = comments;
+		return this;
+	}
 
 	public Set<ArticleEntity> getArticles() {
 		return articles;

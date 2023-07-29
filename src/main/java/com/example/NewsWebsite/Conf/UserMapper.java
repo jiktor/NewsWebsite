@@ -1,8 +1,10 @@
 package com.example.NewsWebsite.Conf;
 
 import com.example.NewsWebsite.Model.DTO.ArticleDTO;
+import com.example.NewsWebsite.Model.DTO.CommentDTO;
 import com.example.NewsWebsite.Model.DTO.UserDTO;
 import com.example.NewsWebsite.Model.Entity.ArticleEntity;
+import com.example.NewsWebsite.Model.Entity.CommentEntity;
 import com.example.NewsWebsite.Model.Entity.UserEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ public class UserMapper {
 	public ArticleEntity DTOToArticle (ArticleDTO articleDTO){
 		return modelMapper.map(articleDTO, ArticleEntity.class);
 	}
+	public CommentEntity DTOToComment (CommentDTO commentDTO){ return modelMapper.map(commentDTO,CommentEntity.class);}
 	public ArticleDTO articleToDTO (ArticleEntity article){
 		ArticleDTO articleDTO = modelMapper.map(article, ArticleDTO.class);
 		articleDTO

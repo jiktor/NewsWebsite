@@ -12,5 +12,7 @@ public interface ArticleService {
 	public List<ArticleDTO> findAllArticles();
 
 	public Page<ArticleDTO> findPage(int pageNumber);
-	public ArticleDTO findByTitle(String title);
+	public ArticleDTO findDTOByTitle(String title);
+	public ArticleEntity findByTitle(String title);
+
 }

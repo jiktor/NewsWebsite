@@ -1,9 +1,11 @@
 package com.example.NewsWebsite.Model.DTO;
 
+import com.example.NewsWebsite.Model.Entity.CommentEntity;
 import com.example.NewsWebsite.Model.Entity.UserEntity;
 import jakarta.validation.constraints.NotEmpty;
 
 import java.util.Date;
+import java.util.List;
 
 public class ArticleDTO {
 	@NotEmpty
@@ -15,6 +17,16 @@ public class ArticleDTO {
 
 	private Date dateOfPublishing;
 	private String base64Image;
+	private List<CommentEntity> commentEntities;
+
+	public List<CommentEntity> getCommentEntities() {
+		return commentEntities;
+	}
+
+	public ArticleDTO setCommentEntities(List<CommentEntity> commentEntities) {
+		this.commentEntities = commentEntities;
+		return this;
+	}
 
 	public ArticleDTO(String title, String text, byte[] images, UserEntity author, Date dateOfPublishing) {
 		this.title = title;

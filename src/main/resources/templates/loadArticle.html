@@ -29,7 +29,26 @@
           </div>
           <div class="row-4">
             <div class="d-flex justify-content-center">
-            <h1>Comments</h1>
+              <form th:object="${commentDTO}"
+                    th:action="@{'/article?title=' + ${article.title}}"
+                    th:method="post">
+                <br>
+                <textarea id="freeform"
+                          name="freeform"
+                          rows="18"
+                          cols="165"
+                          th:field="*{text}"
+                          th:errorclass="is-invalid"></textarea>
+                <small id="textHelp"
+                       class="invalid-feedback bg-danger text-light rounded">
+                  Text is mandatory is mandatory
+                </small>
+                <br>
+                <br>
+                <br>
+                <br>
+                <button type="submit" class="btn btn-dark">Submit</button>
+              </form>
           </div>
           </div>
         </div>

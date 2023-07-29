@@ -77,9 +77,14 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public ArticleDTO findByTitle(String title) {
+	public ArticleDTO findDTOByTitle(String title) {
 		//трябва да се добави проверка в котролера дали е намерена статия
 		ArticleEntity articleEntity = articleRepository.findByTitle(title).orElse(null);
 		return userMapper.articleToDTO(articleEntity);
+	}
+
+	@Override
+	public ArticleEntity findByTitle(String title) {
+		return articleRepository.findByTitle(title).orElse(null);
 	}
 }
