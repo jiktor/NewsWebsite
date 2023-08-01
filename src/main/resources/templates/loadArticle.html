@@ -1,6 +1,19 @@
 <!DOCTYPE html >
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+  <style>
+        /* Apply a frame to the image */
+        img {
+            border: 15px solid #ccc;
+        }
+        textarea {
+            border-radius: 10px;
+            padding: 10px;
+        }
+         a {
+            text-decoration: none;
+        }
+    </style>
   <meta charset="UTF-8">
   <title>Title</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -9,7 +22,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
-<div class="container-fluid w-100">
+<div class="h-100 d-inline-block w-100">
   <div class="row">
     <div class="col">
       <div class="row-2 w-11">
@@ -21,7 +34,11 @@
         <div class="col">
           <div class="row-1"><h1 style="text-align:center" th:text="${article.title}"></h1></div>
           <div class="row-3"><div class="d-flex justify-content-center"><img th:src="@{'data:image/jpeg;base64,'+${article.base64Image}}" class="img-fluid img-thumbnail" alt="No Photo"></div></div>
-          <div class="row-4"><p th:text="${article.text}"></p></div>
+          <div class="row-4">
+            <pre
+                      th:text="${article.text}">
+          </pre>
+          </div>
           <div class="row-4">
             <h5 th:text="'Author:' + ${article.author.username}"></h5>
             <br>
@@ -33,9 +50,10 @@
                     th:action="@{'/article?title=' + ${article.title}}"
                     th:method="post">
                 <br>
-                <textarea id="freeform"
+                <textarea
+                          id="freeform"
                           name="freeform"
-                          rows="18"
+                          rows="3"
                           cols="165"
                           th:field="*{text}"
                           th:errorclass="is-invalid"></textarea>
@@ -47,7 +65,10 @@
                 <br>
                 <br>
                 <br>
-                <button type="submit" class="btn btn-dark">Submit</button>
+                <button type="submit" class="btn btn-dark">Submit comment</button>
+                <button type="submit" class="btn btn-dark">
+                  <a class="button-link" th:href="@{'/article/comment?title=' + ${article.title}}">View Comments</a>
+                </button>
               </form>
           </div>
           </div>

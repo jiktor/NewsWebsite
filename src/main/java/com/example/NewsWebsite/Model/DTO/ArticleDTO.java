@@ -2,13 +2,16 @@ package com.example.NewsWebsite.Model.DTO;
 
 import com.example.NewsWebsite.Model.Entity.CommentEntity;
 import com.example.NewsWebsite.Model.Entity.UserEntity;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 import java.util.Date;
 import java.util.List;
 
 public class ArticleDTO {
 	@NotEmpty
+	@Size(max = 125)
 	private String title;
 	@NotEmpty
 	private String text;

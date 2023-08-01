@@ -14,6 +14,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
+	//TODO когато приложението бъде завършено, трябва да се оправят нвиатра на достъп
+	//-> не идентифициран потребител да може да отвори дадена статияи и да види нейните коментари, но да не може да пише коментари
 	@Bean
 	public PasswordEncoder passwordEncoder(){
 		return  new BCryptPasswordEncoder();
@@ -29,6 +31,7 @@ public class SecurityConfiguration {
 					 auth.requestMatchers("/register").permitAll();
 					 auth.requestMatchers("/article*").authenticated();
 					 auth.requestMatchers("/home/*").authenticated();
+					 auth.requestMatchers("/article/comment*").authenticated();
 				 }).formLogin(form -> form
 						 .loginPage("/login")
 						 .defaultSuccessUrl("/home/1?pageNumber=1",true)

@@ -33,13 +33,17 @@ public class LoadArticleController {
 	}
 	@ModelAttribute("article")
 	public ArticleDTO article(@RequestParam String title){
-		return articleService.findDTOByTitle(title);
+		ArticleDTO articleDTO = articleService.findDTOByTitle(title);
+		articleDTO.setTitle(articleService.formatTitle(articleDTO.getTitle()));
+		return articleDTO;
+		//return articleService.findDTOByTitle(title);
 	}
 	@GetMapping("/article")
 	public String loadArticle(){
 		return "loadArticle";
 	}
 	//TODO да се добавят проверки дали всички полета са попълнени при запазване на нов коментар
+	//TODO трябва да се добави проверка дали потребителя е въвел повече от 255 символа преди коментарара да се запази
 	@PostMapping("/article")
 	public String saveComment(@RequestParam String title,
 							@Valid CommentDTO commentDTO,

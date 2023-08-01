@@ -24,6 +24,7 @@ public class UserMapper {
 		return modelMapper.map(articleDTO, ArticleEntity.class);
 	}
 	public CommentEntity DTOToComment (CommentDTO commentDTO){ return modelMapper.map(commentDTO,CommentEntity.class);}
+	public CommentDTO CommentToDTO (CommentEntity commentEntity){ return modelMapper.map(commentEntity,CommentDTO.class);}
 	public ArticleDTO articleToDTO (ArticleEntity article){
 		ArticleDTO articleDTO = modelMapper.map(article, ArticleDTO.class);
 		articleDTO

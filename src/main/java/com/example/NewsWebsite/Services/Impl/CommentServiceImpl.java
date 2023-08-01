@@ -9,6 +9,8 @@ import com.example.NewsWebsite.Services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class CommentServiceImpl implements CommentService {
 	private final CommentRepository commentRepository;
@@ -20,9 +22,37 @@ public class CommentServiceImpl implements CommentService {
 		this.articleService = articleService;
 		this.userMapper = userMapper;
 	}
-	public void 	save(CommentDTO commentDTO, String articleTitle){
+	public void  save(CommentDTO commentDTO, String articleTitle){
 		CommentEntity commentEntity = userMapper.DTOToComment(commentDTO);
 		commentEntity.setArticle(articleService.findByTitle(articleTitle));
 		commentRepository.save(commentEntity);
 	}
+	@Override
+	public ArrayList<CommentDTO> loadCommentsForArticle(String articleTitle) {
+		ArrayList<CommentEntity> entities = (ArrayList<CommentEntity>)
+				commentRepository.findByArticle(articleService.findByTitle(articleTitle));
+
+		ArrayList<CommentDTO> dtoArrayList = new ArrayList<>();
+		for(CommentEntity entity : entities){
+			dtoArrayList.add(userMapper.CommentToDTO(entity));
+		}
+		return dtoArrayList;
+	}
+
+//	@Override
+//	public Page<CommentDTO> findPage(CommentFilterDTO commentFilterDTO, String title) {
+//		int pageNumber = commentFilterDTO.getPageNumber();
+//		Page<CommentEntity> pageOfEntity = commentRepository.
+//				findPaginatedComment(commentFilterDTO,
+//						PageRequest.of(pageNumber - 1, commentFilterDTO.getPageSize()));
+//
+//		Page<CommentDTO> dtoPage = pageOfEntity.map(new Function<CommentEntity, CommentDTO>()  {
+//			@Override
+//			public CommentDTO apply(CommentEntity entity) {
+//				CommentDTO dto = new CommentDTO();
+//				return userMapper.CommentToDTO(entity);
+//			}
+//		});
+//		return dtoPage;
+//	}
 }
