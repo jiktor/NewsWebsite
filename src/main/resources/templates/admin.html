@@ -5,6 +5,7 @@
   <title>Title</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <div class="h-100 d-inline-block bg-dark w-100">
@@ -14,19 +15,73 @@
   <div class="row vh-100">
     <div class="col-1"></div>
     <div class="col-10 bg-light">
-
-      <div class="form-check form-check-inline" multiple>
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-        <label class="form-check-label" for="inlineRadio1">1</label>
+      <!-- Write your comments here -->
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="row-10">
+              <table class="table table-image">
+                <thead>
+                <tr>
+                  <th scope="col">Username</th>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${users.empty}">
+                  <td colspan="2"> No users available </td>
+                </tr>
+                <tr th:each="user : ${users}">
+                  <td class="w-25">
+                    <b th:text="${user.username}"></b>
+                  </td>
+                  <td>
+                    <b th:text="${user.firstName}"></b>
+                  </td>
+                  <td>
+                    <b th:text="${user.lastName}"></b>
+                  </td>
+                  <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                      <a th:href="@{'/admin/editUser?username=' + ${user.username}}" type="button"  class="btn btn-warning">
+                        <i class="fa fa-folder"></i></a>
+                      <a th:href="@{'/admin/deleteUser?username=' + ${user.username}}" type="button"  class="btn btn-danger">
+                        <i class="fa fa-trash">
+                        </i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--    <footer class="panel-footer">
+                    <nav>
+                        <ul class="pagination" th:each="page : ${pagesForNavigation}">
+                            <li class="page-item"><a class="page-link" href="/home/${page}?pageNumber=${page}">[[${page}]]</a></li>
+                        </ul>
+                    </nav>
+                </footer>
+                !-->
+            <div class="row-2 justify-content-md-center">
+              <footer class="panel-footer">
+                <nav>
+                  <ul class="pagination">
+                    <a class="page-link" th:href="@{'/admin?pageNumber=' + ${pagesForNavigation[0]}}">First Page</a>
+                    <a class="page-link" th:href="@{'/admin?pageNumber=' + ${pagesForNavigation[1]}}">Previous Page</a>
+                    <a class="page-link" th:href="@{'/admin?pageNumber=' + ${pagesForNavigation[2]}}" disabled>[[${pagesForNavigation[2]}]] / [[${totalPages}]]</a>
+                    <a class="page-link" th:href="@{'/admin?pageNumber=' + ${pagesForNavigation[3]}}">Next Page</a>
+                    <a class="page-link" th:href="@{'/admin?pageNumber=' + ${pagesForNavigation[4]}}">Last Page</a>
+                  </ul>
+                </nav>
+              </footer>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-        <label class="form-check-label" for="inlineRadio2">2</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" disabled>
-        <label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
-      </div>
+      <!-- Write your comments here -->
 
     </div>
     <div class="col-1"></div>

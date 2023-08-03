@@ -51,6 +51,7 @@ public class LoadArticleController {
 							RedirectAttributes redirectAttributes,
 							Model model,
 							Principal principal){
+		//TODO не трябва DAO Обекти да се показват в контролера -> трябва да се преработи
 		commentDTO.setAuthor(userEntityService.findByUsernameService(principal.getName()));
 		LocalDateTime myLocalDateTime =  LocalDateTime.now();
 		commentDTO.setDate(java.sql.Timestamp.valueOf( myLocalDateTime ));

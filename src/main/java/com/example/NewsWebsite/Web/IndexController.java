@@ -25,8 +25,6 @@ public class IndexController {
 	public IndexController(ArticleService articleService) {
 		this.articleService = articleService;
 	}
-//	@ModelAttribute("allArticles")
-//	public List<ArticleDTO> allArticles () { return  articleService.findAllArticles();}
 
 	//test
 	@ModelAttribute("allArticles")

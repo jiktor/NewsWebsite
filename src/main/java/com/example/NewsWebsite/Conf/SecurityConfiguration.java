@@ -30,8 +30,11 @@ public class SecurityConfiguration {
 					 auth.requestMatchers("/login").permitAll();
 					 auth.requestMatchers("/register").permitAll();
 					 auth.requestMatchers("/article*").authenticated();
+					 auth.requestMatchers("/admin*").hasRole("ADMIN");
 					 auth.requestMatchers("/home/*").authenticated();
 					 auth.requestMatchers("/article/comment*").authenticated();
+					 auth.requestMatchers("/admin/deleteUser*").hasRole("ADMIN");
+					 auth.requestMatchers("/admin/editUser*").hasRole("ADMIN");
 				 }).formLogin(form -> form
 						 .loginPage("/login")
 						 .defaultSuccessUrl("/home/1?pageNumber=1",true)

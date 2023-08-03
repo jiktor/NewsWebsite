@@ -20,6 +20,7 @@ public class UserMapper {
 	public UserEntity DTOToUser(UserDTO userDTO){
 		return modelMapper.map(userDTO, UserEntity.class);
 	}
+	public UserDTO UserToDTO(UserEntity userEntity){return modelMapper.map(userEntity, UserDTO.class);}
 	public ArticleEntity DTOToArticle (ArticleDTO articleDTO){
 		return modelMapper.map(articleDTO, ArticleEntity.class);
 	}
