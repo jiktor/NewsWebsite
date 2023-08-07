@@ -30,10 +30,6 @@ public class EditUserController {
 	public RolesSetDTO rolesSetDTO(){
 		return new RolesSetDTO();
 	}
-	@ModelAttribute("roles")
-	public Map<String,Boolean> roless(@RequestParam String username){
-		return userService.rolesForUser(username);
-	}
 	@GetMapping("/admin/editUser")
 	public String editUser(
 			Principal principal){

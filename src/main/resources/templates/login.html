@@ -16,12 +16,6 @@
     <div class="col-10 bg-light">
 
       <div class="d-flex flex-column bg-light rounded-3 mt-3">
-        <div th.if="${params.error}" class="alert alert-danger">
-          Invalid credentials
-        </div>
-        <div th.if="${params.logout}" class="alert alert-danger">
-          You have been logged out
-        </div>
         <form th:object="${userDTO}" th:action="@{/login}" method="post">
           <div class="mb-3">
             <label>Username</label>

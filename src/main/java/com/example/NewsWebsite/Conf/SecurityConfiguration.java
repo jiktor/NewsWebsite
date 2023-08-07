@@ -28,6 +28,7 @@ public class SecurityConfiguration {
 					 auth.requestMatchers("/admin").hasRole("ADMIN");
 					 auth.requestMatchers("/newArticle").hasRole("AUTHOR");
 					 auth.requestMatchers("/login").permitAll();
+					 auth.requestMatchers("/about").permitAll();
 					 auth.requestMatchers("/register").permitAll();
 					 auth.requestMatchers("/article*").authenticated();
 					 auth.requestMatchers("/admin*").hasRole("ADMIN");
